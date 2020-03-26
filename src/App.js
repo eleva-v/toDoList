@@ -5,10 +5,15 @@ import './App.css';
 const TodoList = ({ babitems, selected = [], onSelect = () => {} }) => { 
   return (
   <div className='List'>
-    <ul >
+        <ul >
       
       {babitems.map(item => (
-        <li key={item.id}>
+        <li key={item.id} className='Li'>
+          <button  className="button" onClick={(id)=> {if (selected.includes(id)) {
+      
+    } }}>
+          Удалить
+        </button>
           <input onChange={() => onSelect(item.id)} checked={selected.includes(item.id)}  type="checkbox" />
             {item.text}
           </li>
@@ -59,7 +64,20 @@ const App = () => {
     setItems(newItems);
   }
 
-  console.log('RENDERING', selected);
+  const handleof = () => {
+    const newItems = [...items];
+
+    for (const item of newItems) {
+      if (selected.includes(item.id)) {
+        item.done = false;
+      }
+    }
+
+    setSelected([]);
+    setItems(newItems);
+  }
+
+  //console.log('RENDERING', selected);
 
   const todoList = items.filter(item => !item.done);
   const doneList = items.filter(item => item.done);
@@ -69,13 +87,17 @@ const App = () => {
       <div className="App2">
       <div className="Cont">
       <h3 className="App-header"> Список дел</h3>
-      <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} /></div>
-      <button onClick={handleDone}>
+      <button onClick={handleDone} className="button2">
         Done
       </button>
+      <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} /></div>
+      
       <div className="Cont2">
       <h3 className="App-header2"> Выполнено</h3>
-      <TodoList babitems={doneList} />
+      <button onClick={handleof} className="button3">
+      Сancel
+      </button>
+      <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} />
       </div>
       </div>
         <div className="form">
@@ -84,7 +106,6 @@ const App = () => {
         </label>
         <input className="input"
           id="new-todo"
-
           onChange={handleChange}
           value={text}
         />

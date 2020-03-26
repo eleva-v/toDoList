@@ -43,6 +43,26 @@ height: 100%;
   
 }
 
+.button2 {
+  display: flex;
+  float:right;
+  border-radius: 50%;
+  height: 35px;
+  background-color: chartreuse;
+  
+}
+.button3{
+  display: flex;
+  float: left;
+  border-radius: 50%;
+  height: 35px;
+  background-color: rebeccapurple;
+}
+
+.li {
+  list-style:none;
+}
+
 .List {
   text-align: left ;
   text-indent:100px;
