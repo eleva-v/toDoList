@@ -1,0 +1,110 @@
+
+.App {
+  background-color: aqua;
+}
+.Cont {
+  background-color: aqua;
+  float:left;
+width:50%;
+}
+
+.Cont2 {
+  background-color: aqua;
+   float:right;
+width:50%;
+height: 100%;
+}
+
+.App-header {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-top: 0px;
+  
+}
+
+.App-header2 {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-top: 0px;
+  
+}
+
+.List {
+  text-align: left ;
+  text-indent:100px;
+  background-color: aqua;
+  display: relative;
+  font-size: 20px;
+  min-height: 300px;
+  
+}
+
+.App2{
+  min-height: 500px;
+  max-height: 100%;
+  }
+
+.form {
+  margin-bottom: 0px;
+  width: 100%;
+  float:bottom;
+  background-color: #282c34;
+  color: aliceblue;
+  text-align: center ;
+  height: 50px;
+  padding-top: 15px;
+}
+
+.label {
+  margin-right: 50px;
+}
+
+.input{
+  height: 24px;
+  width: 500px;  
+}
+
+.button {
+  margin-left: 50px;
+  position: relative;
+  display: inline-block;
+  font-size: 90%;
+  font-weight: 700;
+  color: rgb(209,209,217);
+  text-decoration: none;
+  text-shadow: 0 -1px 2px rgba(0,0,0,.2);
+  padding: .5em 1em;
+  outline: none;
+  border-radius: 3px;
+  background: linear-gradient(rgb(76, 130, 155), rgb(60, 190, 230)) rgb(108, 198, 221);
+  box-shadow:
+   0 1px rgba(255,255,255,.2) inset,
+   0 3px 5px rgba(0,1,6,.5),
+   0 0 1px 1px rgba(0,1,6,.2);
+  transition: .2s ease-in-out;
+}
+.button:hover:not(:active) {
+  background: linear-gradient(rgb(53, 85, 104), rgb(24, 92, 119)) rgb(62, 128, 158);
+}
+.button:active {
+  top: 1px;
+  background: linear-gradient(rgb(39, 163, 185), rgb(41, 136, 160)) rgb(23, 107, 133);
+  box-shadow:
+   0 0 1px rgba(0,0,0,.5) inset,
+   0 2px 3px rgba(0,0,0,.5) inset,
+   0 1px 1px rgba(255,255,255,.1);
+}
