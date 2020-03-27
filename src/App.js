@@ -9,9 +9,7 @@ const TodoList = ({ babitems, selected = [], onSelect = () => {} }) => {
       
       {babitems.map(item => (
         <li key={item.id} className='Li'>
-          <button  className="button" onClick={(id)=> {if (selected.includes(id)) {
-      
-    } }}>
+          <button  className="button4" onClick={()=> onCl()}>
           Удалить
         </button>
           <input onChange={() => onSelect(item.id)} checked={selected.includes(item.id)}  type="checkbox" />
@@ -77,6 +75,12 @@ const App = () => {
     setItems(newItems);
   }
 
+  const forRemoveId = selected
+  const del = 
+  items = items.filter((items) => {
+    return items.id !== forRemoveId;
+  });
+
   //console.log('RENDERING', selected);
 
   const todoList = items.filter(item => !item.done);
@@ -97,7 +101,7 @@ const App = () => {
       <button onClick={handleof} className="button3">
       Сancel
       </button>
-      <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} />
+      <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} onCl={del} />
       </div>
       </div>
         <div className="form">
