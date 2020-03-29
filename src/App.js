@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
-
+import { makeStyles } from '@material-ui/core/styles';
 import './App.css';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import SaveIcon from '@material-ui/icons/Save';
 
-const TodoList = ({ babitems, selected = [], onSelect = () => {} }) => { 
+
+const TodoList = ({ onCl= () => {}, babitems, selected = [], onSelect = () => {} }) => { 
   return (
   <div className='List'>
+    
+   
         <ul >
-      
+        
       {babitems.map(item => (
         <li key={item.id} className='Li'>
-          <button  className="button4" onClick={()=> onCl()}>
-          Удалить
-        </button>
-          <input onChange={() => onSelect(item.id)} checked={selected.includes(item.id)}  type="checkbox" />
+           <IconButton   aria-label="delete">
+        <DeleteIcon onClick={()=> onCl()}/>
+      </IconButton>
+      <Checkbox
+        checked={selected.includes(item.id)} 
+        onChange={() => onSelect(item.id)} 
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      > 
+      </Checkbox>
+          
             {item.text}
           </li>
       ))}
@@ -75,11 +90,10 @@ const App = () => {
     setItems(newItems);
   }
 
-  const forRemoveId = selected
-  const del = 
-  items = items.filter((items) => {
-    return items.id !== forRemoveId;
-  });
+  //const forRemoveId = selected
+  const del = () => setItems(items.filter((items) => {
+    return !(selected.includes(items.id))==items.id ;
+  }));
 
   //console.log('RENDERING', selected);
 
@@ -91,16 +105,14 @@ const App = () => {
       <div className="App2">
       <div className="Cont">
       <h3 className="App-header"> Список дел</h3>
-      <button onClick={handleDone} className="button2">
-        Done
-      </button>
-      <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} /></div>
+      
+      <Button color="secondary" onClick={handleDone} className="button2">Done</Button>
+      <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} onCl={del}/></div>
       
       <div className="Cont2">
       <h3 className="App-header2"> Выполнено</h3>
-      <button onClick={handleof} className="button3">
-      Сancel
-      </button>
+      <Button color="secondary" onClick={handleof} className="button3">Сancel</Button>
+      
       <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} onCl={del} />
       </div>
       </div>
@@ -108,14 +120,20 @@ const App = () => {
         <label className='label' htmlFor="new-todo">
           Что нужно сделать?
         </label>
-        <input className="input"
-          id="new-todo"
-          onChange={handleChange}
-          value={text}
-        />
-        <button disabled={!text.length} className="button" onClick={handleSubmit}>
-          Добавить
-        </button>
+        <TextField id="new-todo" label=" Что нужно сделать?" className="input" onChange={handleChange}
+          value={text} color="secondary"/>
+       
+       <Button
+        variant="contained"
+        color="primary"
+        size="large"
+        className="button"
+        startIcon={<SaveIcon />}
+        disabled={!text.length} onClick={handleSubmit}
+      >
+        Добавить
+      </Button>
+        
       </div>
     </div>
     
