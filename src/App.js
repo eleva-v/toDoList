@@ -106,13 +106,32 @@ const App = () => {
       <div className="Cont">
       <h3 className="App-header"> Список дел</h3>
       
-      <Button color="secondary" onClick={handleDone} className="button2">Done</Button>
+      <Button
+            variant="outlined"
+            size="small"
+            className="button2" 
+            onClick={handleDone}
+            
+            aria-label="move selected right"
+          >
+            &gt;
+          </Button>
       <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} onCl={del}/></div>
       
       <div className="Cont2">
       <h3 className="App-header2"> Выполнено</h3>
-      <Button color="secondary" onClick={handleof} className="button3">Сancel</Button>
       
+      <Button
+            variant="outlined"
+            size="small"
+            className="button3" 
+            onClick={handleof}
+            
+            aria-label="move selected right"
+          >
+             &lt;
+          </Button>
+
       <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} onCl={del} />
       </div>
       </div>
