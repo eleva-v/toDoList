@@ -9,7 +9,10 @@
     color: black;
 }
 
-
+.CheckAll{
+  float: left;
+  
+}
 
 .Titel{
     float: left;
@@ -21,6 +24,8 @@
     height: 50px;
     margin-bottom: 0px;
     padding-bottom: 0px;
+    
+    
 }
 .Titel2{
     float: right;
