@@ -16,7 +16,9 @@ import KeyboardArrowLeftSharpIcon from '@material-ui/icons/KeyboardArrowLeftShar
 const TodoList = ({ babitems, selected = [], onSelect = () => { } }) => {
     return (
         <div className='List'>
+
             <List className="List">
+
                 {babitems.map(item => (
                     <ListItem key={item.id} className='Li'>
 
@@ -90,6 +92,18 @@ const App = () => {
         setItems(newItems);
     }
 
+    const allChecked = () => {
+        const newItems = [...items];
+
+        for (const item of newItems) {
+            if (!selected.includes(item.id)) {
+                setSelected([...selected, item.id])
+            }
+        }
+
+
+
+    }
 
     const del = () => setItems(items.filter((items) => {
         return !selected.includes(items.id);
@@ -101,7 +115,16 @@ const App = () => {
     return (
         <div>
             <div>
-                <h3 className="Titel"> Список дел</h3>
+
+                {/* <button onClick={allChecked} className="button"><input tipe="checkbox" /> </button> */}
+                <h3 className="Titel">
+                    <Checkbox
+                        className="CheckAll"
+                        onChange={allChecked}
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                    >
+                    </Checkbox>
+                Список дел</h3>
                 <h3 className="Titel2"> Выполнено </h3>
             </div>
 
