@@ -13,7 +13,7 @@ import KeyboardArrowRightSharpIcon from '@material-ui/icons/KeyboardArrowRightSh
 import KeyboardArrowLeftSharpIcon from '@material-ui/icons/KeyboardArrowLeftSharp';
 
 
-const TodoList = ({ babitems, selected = [], onSelect = () => { } }) => {
+const TodoList = ({ /*onKeyPress = () => { },*/ babitems, selected = [], onSelect = () => { } }) => {
     return (
         <div className='List'>
 
@@ -25,7 +25,9 @@ const TodoList = ({ babitems, selected = [], onSelect = () => { } }) => {
                         <Checkbox
                             checked={selected.includes(item.id)}
                             onChange={() => onSelect(item.id)}
+                            // onKeyPress={onKeyPress()}
                             inputProps={{ 'aria-label': 'primary checkbox' }}
+
                         >
                         </Checkbox>
 
@@ -46,6 +48,22 @@ const App = () => {
     const handleChange = (e) => {
         setText(e.target.value);
     }
+
+    // const keyPress = (e) => {
+    //     console.log(e)
+    //     if (e.key === 'Enter') {
+    //         const newItem = {
+    //             text,
+    //             id: Date.now(),
+    //             done: false
+    //         };
+
+    //         setItems([...items, newItem]);
+    //         setText('');
+    //     }
+    // };
+
+
 
     const handleSubmit = () => {
         const newItem = {
@@ -93,17 +111,35 @@ const App = () => {
     }
 
     const allChecked = () => {
-        const newItems = [...items];
+        const newItems = [...todoList];
+        let i = [];
 
         for (const item of newItems) {
             if (!selected.includes(item.id)) {
-                setSelected([...selected, item.id])
+                i.push(...selected, item.id)
+            } else {
+                i = [];
+
             }
+            setSelected([...i])
         }
-
-
-
     }
+
+    const allChecked2 = () => {
+        const newItems = [...doneList];
+        let i = [];
+
+        for (const item of newItems) {
+            if (!selected.includes(item.id)) {
+                i.push(...selected, item.id)
+            } else {
+                i = [];
+
+            }
+            setSelected([...i])
+        }
+    }
+
 
     const del = () => setItems(items.filter((items) => {
         return !selected.includes(items.id);
@@ -113,25 +149,38 @@ const App = () => {
     const doneList = items.filter(item => item.done);
 
     return (
-        <div>
-            <div>
-
-                {/* <button onClick={allChecked} className="button"><input tipe="checkbox" /> </button> */}
-                <h3 className="Titel">
+        <div className="Test">
+            <div >
+                <div className="CheckAll">
                     <Checkbox
-                        className="CheckAll"
+                        // checked={}
                         onChange={allChecked}
                         inputProps={{ 'aria-label': 'primary checkbox' }}
                     >
                     </Checkbox>
-                Список дел</h3>
-                <h3 className="Titel2"> Выполнено </h3>
+                </div>
+                {/* <button onClick={allChecked} className="button"><input tipe="checkbox" /> </button> */}
+                <h3 className="Titel">
+                    Список дел
+                </h3>
+
+                <h3 className="Titel2">
+                    Выполнено
+                </h3>
+                <div className="CheckAll">
+                    <Checkbox
+
+                        onChange={allChecked2}
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                    >
+                    </Checkbox>
+                </div>
             </div>
 
             <div className="contener">
 
                 <div className="toDo">
-                    <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} />
+                    <TodoList babitems={todoList} selected={selected} onSelect={handleSelect} /*onKeyPress={keyPress}*/ />
                 </div>
 
                 <div className="Buttons">
@@ -165,7 +214,7 @@ const App = () => {
 
 
                 <div className="done">
-                    <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} />
+                    <TodoList babitems={doneList} selected={selected} onSelect={handleSelect} /*onKeyPress={keyPress}*/ />
                 </div>
             </div>
             <div className="form">
