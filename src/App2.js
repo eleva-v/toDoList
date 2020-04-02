@@ -49,19 +49,19 @@ const App = () => {
         setText(e.target.value);
     }
 
-    // const keyPress = (e) => {
-    //     console.log(e)
-    //     if (e.key === 'Enter') {
-    //         const newItem = {
-    //             text,
-    //             id: Date.now(),
-    //             done: false
-    //         };
+    const keyPress = (e) => {
 
-    //         setItems([...items, newItem]);
-    //         setText('');
-    //     }
-    // };
+        if (e.key === 'Enter') {
+            const newItem = {
+                text,
+                id: Date.now(),
+                done: false
+            };
+
+            setItems([...items, newItem]);
+            setText('');
+        }
+    };
 
 
 
@@ -220,7 +220,7 @@ const App = () => {
             <div className="form">
 
                 <TextField id="new-todo" label=" Что нужно сделать?" className="input" onChange={handleChange}
-                    value={text} color="secondary" />
+                    value={text} color="secondary" onKeyPress={keyPress} />
 
                 <Button
                     variant="contained"
