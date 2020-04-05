@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App2.css";
 import {
   IconButton,
@@ -6,24 +6,24 @@ import {
   Button,
   TextField,
   ListItem,
-  List
+  List,
 } from "@material-ui/core";
 import {
   Delete as DeleteIcon,
   PlaylistAdd as PlaylistAddIcon,
   KeyboardArrowRightSharp as KeyboardArrowRightSharpIcon,
-  KeyboardArrowLeftSharp as KeyboardArrowLeftSharpIcon
+  KeyboardArrowLeftSharp as KeyboardArrowLeftSharpIcon,
 } from "@material-ui/icons";
 
 const TodoList = ({
   /*onKeyPress = () => { },*/ babitems,
   selected = [],
-  onSelect = () => {}
+  onSelect = () => {},
 }) => {
   return (
     <div className="List">
       <List className="List">
-        {babitems.map(item => (
+        {babitems.map((item) => (
           <ListItem key={item.id} className="Li">
             <Checkbox
               checked={selected.includes(item.id)}
@@ -46,16 +46,24 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [text, setText] = useState("");
 
-  const handleChange = e => {
+  useEffect(() => {
+    fetch("http://localhost:7777/ivan", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then(data => setItems(data.data));
+  }, []);
+
+  const handleChange = (e) => {
     setText(e.target.value);
   };
 
-  const keyPress = e => {
+  const keyPress = (e) => {
     if (e.key === "Enter") {
       const newItem = {
         text,
         id: Date.now(),
-        done: false
+        done: false,
       };
 
       setItems([...items, newItem]);
@@ -67,24 +75,24 @@ const App = () => {
     const newItem = {
       text,
       id: Date.now(),
-      done: false
+      done: false,
     };
 
     setItems([...items, newItem]);
     setText("");
   };
 
-  const handleSelectTodo = id => {
+  const handleSelectTodo = (id) => {
     if (selectedTodo.includes(id)) {
-      setSelectedTodo(selectedTodo.filter(item => item !== id));
+      setSelectedTodo(selectedTodo.filter((item) => item !== id));
     } else {
       setSelectedTodo([...selectedTodo, id]);
     }
   };
 
-  const handleSelectDone = id => {
+  const handleSelectDone = (id) => {
     if (selectedDone.includes(id)) {
-      setSelectedDone(selectedDone.filter(item => item !== id));
+      setSelectedDone(selectedDone.filter((item) => item !== id));
     } else {
       setSelectedDone([...selectedDone, id]);
     }
@@ -118,17 +126,17 @@ const App = () => {
 
   const del = () => {
     setItems(
-      items.filter(items => {
+      items.filter((items) => {
         return ![...selectedTodo, ...selectedDone].includes(items.id);
       })
     );
-    
+
     setSelectedTodo([]);
     setSelectedDone([]);
   };
 
-  const todoList = items.filter(item => !item.done);
-  const doneList = items.filter(item => item.done);
+  const todoList = items.filter((item) => !item.done);
+  const doneList = items.filter((item) => item.done);
 
   const handleToggleTodo = () => {
     if (todoList.length === selectedTodo.length) {
