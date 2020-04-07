@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App2.css";
 import {
   IconButton,
@@ -16,9 +16,9 @@ import {
 } from "@material-ui/icons";
 
 const TodoList = ({
-  /*onKeyPress = () => { },*/ babitems,
+  babitems,
   selected = [],
-  onSelect = () => {}
+  onSelect = () => { }
 }) => {
   return (
     <div className="List">
@@ -30,7 +30,7 @@ const TodoList = ({
               onChange={() => onSelect(item.id)}
               // onKeyPress={onKeyPress()}
               inputProps={{ "aria-label": "primary checkbox" }}
-            ></Checkbox>
+            />
 
             {item.text}
           </ListItem>
@@ -45,6 +45,13 @@ const App = () => {
   const [selectedDone, setSelectedDone] = useState([]);
   const [items, setItems] = useState([]);
   const [text, setText] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3001/elena",
+      { metod: "GET", })
+      .then((response) => response.json())
+      .then(data => setItems(data.data));
+  }, []);
 
   const handleChange = e => {
     setText(e.target.value);
@@ -122,7 +129,7 @@ const App = () => {
         return ![...selectedTodo, ...selectedDone].includes(items.id);
       })
     );
-    
+
     setSelectedTodo([]);
     setSelectedDone([]);
   };
@@ -156,7 +163,7 @@ const App = () => {
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </div>
-        {/* <button onClick={allChecked} className="button"><input tipe="checkbox" /> </button> */}
+
         <h3 className="Titel">Список дел</h3>
 
         <h3 className="Titel2">Выполнено</h3>
@@ -174,7 +181,7 @@ const App = () => {
           <TodoList
             babitems={todoList}
             selected={selectedTodo}
-            onSelect={handleSelectTodo} /*onKeyPress={keyPress}*/
+            onSelect={handleSelectTodo}
           />
         </div>
 
@@ -208,10 +215,10 @@ const App = () => {
           <TodoList
             babitems={doneList}
             selected={selectedDone}
-            onSelect={handleSelectDone} /*onKeyPress={keyPress}*/
+            onSelect={handleSelectDone}
           />
         </div>
-      </div>
+      </div >
       <div className="form">
         <TextField
           id="new-todo"
@@ -228,10 +235,10 @@ const App = () => {
           color="primary"
           size="large"
           className="button"
-          startIcon={<PlaylistAddIcon />}
           disabled={!text.length}
           onClick={handleSubmit}
-        />
+        > <PlaylistAddIcon />
+        </Button>
       </div>
     </div>
   );

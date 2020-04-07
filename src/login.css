@@ -1,0 +1,14 @@
+.Auto {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    margin: -125px 0 0 -125px;
+}
+
+.input{
+    height: 24px;
+    width: 500px; 
+    color: green;
+}
