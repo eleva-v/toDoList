@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App2.css";
+// import login from './login'
 import {
   IconButton,
   Checkbox,
@@ -47,7 +48,7 @@ const App = () => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3001/elena",
+    fetch("http://localhost:3001/",
       { metod: "GET", })
       .then((response) => response.json())
       .then(data => setItems(data.data));
