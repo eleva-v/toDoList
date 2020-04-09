@@ -1,37 +1,44 @@
 import React, { useState } from "react";
 import "./login.css";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import { Link } from "react-router-dom";
 // import TextField from "@material-ui/core";
 
 const Log = () => {
-    const [text, setText] = useState("");
-    const handleChange = e => { setText(e.target.value); }
-    const handleClick = () => {
-        if (text === "log") {
-            return <Link to={`/App`} />
-        }
+    const [login, setLogin] = useState("");
 
+
+
+    const handleChange = e => { setLogin(e.target.value); }
+    const handleClick = (props) => {
+        console.log(props)
     }
 
 
-    return (
-        <div className="Auto"> <h1>Авторизация</h1>
-            <div>
-                <input
-                    id="new-todo"
-                    label=" Что нужно сделать?"
-                    className="input"
-                    onChange={handleChange}
-                    value={text}
-                // color="secondary"
-                // onKeyPress={keyPress}
-                />
-                <button onClick={handleClick}>click
-                    {/* <Link to={`/App`}>click</Link> */}
-                </button>
-            </div>
 
+
+
+    return (
+        <div className="Auto">
+            <div>
+                <h1>Авторизация</h1>
+                <div className="AutoLog" >
+                    <TextField
+                        id="login"
+                        label="Логин"
+                        className="input"
+                        onChange={handleChange}
+                        value={login}
+                    />
+
+                    <Button type="success" onClick={handleClick}>
+                        <Link to={`/App`} > Войти </Link>
+                    </Button>
+
+                </div>
+            </div>
         </div >
     )
 }
