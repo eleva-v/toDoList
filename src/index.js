@@ -13,7 +13,7 @@ import {
 ReactDOM.render(<Router>
     <Switch>
         <Route path="/" exact component={Log} />
-        <Route path="/App" component={App} />
+        <Route path="/App/:id" component={App} />
     </Switch>
 </Router >, document.getElementById('root'));
 
