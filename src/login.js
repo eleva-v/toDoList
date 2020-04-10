@@ -21,15 +21,11 @@ const Log = () => {
     const handleClick = () => {
 
         if (login === log) {
-            browserHistory.push(`/App/${log}`)
+            browserHistory.push(`/app/${log}`)
         } else {
             alert("error")
         }
     }
-
-
-
-
 
     return (
         <div className="Auto">
