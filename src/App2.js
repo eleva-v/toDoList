@@ -15,6 +15,8 @@ import {
   KeyboardArrowRightSharp as KeyboardArrowRightSharpIcon,
   KeyboardArrowLeftSharp as KeyboardArrowLeftSharpIcon
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+
 
 const TodoList = ({
   babitems,
@@ -33,7 +35,7 @@ const TodoList = ({
               inputProps={{ "aria-label": "primary checkbox" }}
             />
 
-            {item.text}
+            <Link to={`/item/${item.id}`}>{item.text}</Link>
           </ListItem>
         ))}
       </List>
@@ -48,11 +50,14 @@ const App = () => {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3001/",
-      { metod: "GET", })
+    fetch("http://localhost:3001/", {
+      method: "GET",
+    })
       .then((response) => response.json())
       .then(data => setItems(data.data));
   }, []);
+
+
 
   const handleChange = e => {
     setText(e.target.value);
@@ -154,12 +159,14 @@ const App = () => {
     }
   };
 
+
+
   return (
     <div className="Test">
       <div>
         <div className="CheckAll">
           <Checkbox
-            checked={todoList.length && selectedTodo.length === todoList.length}
+            checked={!!todoList.length && selectedTodo.length === todoList.length}
             onChange={handleToggleTodo}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
@@ -170,7 +177,7 @@ const App = () => {
         <h3 className="Titel2">Выполнено</h3>
         <div className="CheckAll">
           <Checkbox
-            checked={doneList.length && selectedDone.length === doneList.length}
+            checked={!!doneList.length && selectedDone.length === doneList.length}
             onChange={handleToggleDone}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
@@ -197,8 +204,8 @@ const App = () => {
             <KeyboardArrowRightSharpIcon />
           </Button>
 
-          <IconButton aria-label="delete">
-            <DeleteIcon onClick={del} />
+          <IconButton aria-label="delete" onClick={del}>
+            <DeleteIcon />
           </IconButton>
 
           <Button
