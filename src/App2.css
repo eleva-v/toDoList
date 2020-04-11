@@ -37,6 +37,8 @@
   background-color: PowderBlue;
 }
 
+ 
+
 .Titel{
     float: left;
     width: 45%;
@@ -65,11 +67,21 @@
 
 .Buttons{
     
-    padding-top: 15%;
+    
     text-align: center;
     width: 20%;
     background-color:LightSteelBlue;
 }
+
+.ButtonCont{
+  margin-top: 50%;
+}
+
+.buttonExit {
+  padding-top: 40px;
+   
+   text-align: center;
+ }
 
 .Button2{
   width: 5px;
@@ -147,3 +159,5 @@
      0 2px 3px rgba(0,0,0,.5) inset,
      0 1px 1px rgba(255,255,255,.1);
   }
+
+ 
