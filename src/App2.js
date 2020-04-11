@@ -13,9 +13,11 @@ import {
   Delete as DeleteIcon,
   PlaylistAdd as PlaylistAddIcon,
   KeyboardArrowRightSharp as KeyboardArrowRightSharpIcon,
-  KeyboardArrowLeftSharp as KeyboardArrowLeftSharpIcon
+  KeyboardArrowLeftSharp as KeyboardArrowLeftSharpIcon,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+// import { Link } from "react-router-dom";
 
 
 const TodoList = ({
@@ -34,8 +36,8 @@ const TodoList = ({
               // onKeyPress={onKeyPress()}
               inputProps={{ "aria-label": "primary checkbox" }}
             />
-
-            <Link to={`/item/${item.id}`}>{item.text}</Link>
+            {item.text}
+            {/* <Link to={`/item/${item.id}`}>{item.text}</Link> */}
           </ListItem>
         ))}
       </List>
@@ -43,21 +45,21 @@ const TodoList = ({
   );
 };
 
-const App = () => {
+const App = props => {
+
   const [selectedTodo, setSelectedTodo] = useState([]);
   const [selectedDone, setSelectedDone] = useState([]);
   const [items, setItems] = useState([]);
   const [text, setText] = useState("");
 
+
   useEffect(() => {
-    fetch("http://localhost:3001/", {
+    fetch(`http://localhost:3001/?user=${props.match.params.name}`, {
       method: "GET",
     })
       .then((response) => response.json())
       .then(data => setItems(data.data));
-  }, []);
-
-
+  }, [props.match.params.name]);
 
   const handleChange = e => {
     setText(e.target.value);
@@ -159,7 +161,9 @@ const App = () => {
     }
   };
 
-
+  const handleExit = () => {
+    props.history.push(`/`)
+  }
 
   return (
     <div className="Test">
@@ -194,29 +198,43 @@ const App = () => {
         </div>
 
         <div className="Buttons">
-          <Button
-            variant="outlined"
-            size="small"
-            className="button2"
-            onClick={handleDone}
-            aria-label="move selected right"
-          >
-            <KeyboardArrowRightSharpIcon />
-          </Button>
+          <div className="buttonExit">
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={handleExit}
+              aria-label="move selected right"
+            >
+              <ExitToAppIcon />
+            </Button>
+          </div>
+          <div className="ButtonCont">
+            <Button
+              variant="outlined"
+              size="small"
+              className="button2"
+              onClick={handleDone}
+              aria-label="move selected right"
+            >
+              <KeyboardArrowRightSharpIcon />
+            </Button>
 
-          <IconButton aria-label="delete" onClick={del}>
-            <DeleteIcon />
-          </IconButton>
+            <IconButton aria-label="delete" onClick={del}>
+              <DeleteIcon />
+            </IconButton>
 
-          <Button
-            variant="outlined"
-            size="small"
-            className="button3"
-            onClick={handleUndo}
-            aria-label="move selected right"
-          >
-            <KeyboardArrowLeftSharpIcon />
-          </Button>
+            <Button
+              variant="outlined"
+              size="small"
+              className="button3"
+              onClick={handleUndo}
+              aria-label="move selected right"
+            >
+              <KeyboardArrowLeftSharpIcon />
+            </Button>
+          </div>
+
+
         </div>
 
         <div className="done">

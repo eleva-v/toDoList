@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import Log from './login';
-import Item from './Item';
+import Log from './login';
+// import Item from './Item';
 import * as serviceWorker from './serviceWorker';
 import App from './App2';
 import {
@@ -13,10 +13,10 @@ import {
 
 ReactDOM.render(<Router>
     <Switch>
-        {/* <Route path="/" exact component={Log} />
-        <Route path="/app" component={App} /> */}
-        <Route path="/" exact component={App} />
-        <Route path="/item/:id" component={Item} />
+        <Route path="/" exact component={Log} />
+        <Route path="/app/:name" component={App} />
+        {/* <Route path="/" exact component={App} />
+        <Route path="/item/:id" component={Item} /> */}
 
     </Switch>
 </Router >, document.getElementById('root'));
